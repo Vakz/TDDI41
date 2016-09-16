@@ -28,9 +28,8 @@ def generate_string(length):
     chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
     return "".join([choice(chars) for _ in range(length)])
 
-def generate_password(length):
+def encrypt_password(password):
     import crypt
-    generated_password = generate_string(length)
     salt = crypt.mksalt()
     encrypted = crypt.crypt(generated_password, salt)
     return encrypted
@@ -42,8 +41,16 @@ def create_user(username):
         print("Could not create a valid username from the given name")
         return False
     generated_username = generate_username(username)
-    password = generate_password(8)
+    password = generate_string(8)
+    encrypted_password = encrypt_password(passowrd)
     res = subprocess.call(["useradd", "-p", password, "-m", generated_username], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    print(res)
+    if(res == 0):
+        print("Username: " + generated_username + ", Password: " + password)
+    else:
+        print("Failed to add new user")
 
-create_user("asd")
+print("Enter empty line to exit")
+line = input("Enter username: ")
+while(len(line) != 0):
+    create_user(line)
+    line = input("Username: ")
