@@ -1,0 +1,15 @@
+LAB 1 User Mode Linux
+---------------------------------------------------------
+
+3-2) 64MB
+
+3-3) Screen is a program through which one can run several virtual terminals through a single terminal, which is useful when only one terminal is available, such as when connected remotely through SSH. It also allows for detatching,
+     which makes it possible to resume work at a later point, or keep programs running after the terminal has been closed, which is again useful when working through SSH, as any running programs would be closed when the SSH connection
+     was closed.
+
+6-1) scp root@<gw-ip>:/etc/network/interfaces .
+
+6-2) scp -r root@<gw-up>:/etc/default .
+
+
+

@@ -1,0 +1,35 @@
+3-1) a) User Commands, System Calls, Library Functions, Special Files, File Formats and conventions, Games, Miscellaneous, SysAdmin Commands, Kernel Routines
+
+     b) Section 1, User Commands
+
+     c) Section 5, File Formats and Conventions
+
+     d) Section 8, System Administration Commands
+
+4-1) a) Runs the mkpasswd command. Both PASSWORD and SALT must be specified.
+
+     b) Runs the uniq command. Several options can be specified, but requires none. An optional input may be specified. An optional output may also be specified, but only if an input was specified as well.
+
+     c) Guns the gzip command, which has several optional flags (acdfhklLnNrtvV19). There is also a --resyncable flag which may be set. Optionally, another suffix than the default .gz may be used for the output files. Last, the files to be compressed may be entered, but is not required.
+
+     d) 1) Invoke chcon command, optionally specifying more or one options. A context must be specified. Lastly, one or more files are specified.
+        2) Invoke chcon, optionally specifying more or one options. The argument -u is optional to specify a USER. The argument -r may be used to specify a ROLE. Last, one or more files are specified.
+        3) Invoke chcon, optionally specifying more or one options. A reference must be specified using --reference=RFILE. Lastly, one or more files are specified.
+
+4-2) a) Gives an overview over the programs functionality and the flags and arguments.
+
+     b) In the DESCRIPTION or the OPTIONS section. It appears to vary between different programs.
+
+     c) In the SEE ALSO section. In the example, this section will point out the SHUTDOWN(8) page.
+
+     d) In the FILES section.
+
+4-3) a) -a will show each exact match in turn.
+
+     b) -k can be used to list all man pages which contain the keyword.
+
+4-4) a) List directory contents
+ 
+     b) -l
+
+     c) 

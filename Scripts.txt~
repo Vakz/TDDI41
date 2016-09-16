@@ -1,0 +1,46 @@
+Lab 4 Scripts
+---------------------------------------------------------
+
+1-1) $@ will split the argument line into single words, while $* will treat the argument line as a single argument.
+
+#! /bin/sh
+for v in "$@" ; do
+	echo $v
+done
+
+for v in "$*" ; do
+	echo $v
+done
+
+2-1) The quotes makes sure $@ is treated as a string and not as a command
+
+2-2) Yes, if the quotes are removed, $* will behave the same as $@
+
+3-1) 
+
+#/bin/sh
+l="4"
+while [ "$l" -gt "0" ] ; do
+	echo "$l"
+	l=$(echo "$l - 1"|bc)
+done
+
+5-1) This will read 1 character from the variable line, with an offset of 0. In other words, it will print the first
+     character in the variable.
+
+5-2) Colon is a sort of alias for "true", which can be used as filler when you don't wish to write anything
+     within a block that otherwise requires at least one statement, such as the body of an if.
+
+5-3) $()
+
+5-4) It is used to doing math in bash. In the man pages it is called Arithemetic Expansion
+
+5-5) ls -A | grep ^[.] -c
+
+6-1) a) It is used as a sort of breakline. The second and third line will be treated as a single line by the interpreter.
+
+     b) Normally, you can only have a single expression as an operand when using ||. By using { }, the two statements are combined into a code block, which will then be treated as a single statement. When using parenthesis, the exit command is never run.
+
+6-2) Variables in bash are by default global. Using local makes the variable local to the current scope.
+
+6-3) 
