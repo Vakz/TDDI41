@@ -42,7 +42,7 @@ def create_user(username):
         return False
     generated_username = generate_username(username)
     password = generate_string(8)
-    encrypted_password = encrypt_password(passowrd)
+    encrypted_password = encrypt_password(password)
     res = subprocess.call(["useradd", "-p", password, "-m", generated_username], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if(res == 0):
         print("Username: " + generated_username + ", Password: " + password)
