@@ -31,7 +31,7 @@ def generate_string(length):
 def encrypt_password(password):
     import crypt
     salt = crypt.mksalt()
-    encrypted = crypt.crypt(generated_password, salt)
+    encrypted = crypt.crypt(password, salt)
     return encrypted
 
 def create_user(username):
@@ -43,7 +43,7 @@ def create_user(username):
     generated_username = generate_username(username)
     password = generate_string(8)
     encrypted_password = encrypt_password(password)
-    res = subprocess.call(["useradd", "-p", password, "-m", generated_username], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    res = subprocess.call(["useradd", "-p", encrypted_password, "-m", generated_username], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if(res == 0):
         print("Username: " + generated_username + ", Password: " + password)
     else:
