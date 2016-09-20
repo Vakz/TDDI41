@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 
 from pwd import getpwnam
+import fileinput
 import string
 import re
 
@@ -35,11 +36,12 @@ def encrypt_password(password):
     return encrypted
 
 def create_user(username):
+    username = username.strip()
+    print("Processing \"" + username + "\"")
     import subprocess
     username = filter_username(username)
     if len(username) == 0:
-        print("Could not create a valid username from the given name")
-        return False
+        print("Could not create a valid username from \"" + username + "\"")
     generated_username = generate_username(username)
     password = generate_string(8)
     encrypted_password = encrypt_password(password)
@@ -49,8 +51,5 @@ def create_user(username):
     else:
         print("Failed to add new user")
 
-print("Enter empty line to exit")
-line = input("Enter username: ")
-while(len(line) != 0):
+for line in fileinput.input():
     create_user(line)
-    line = input("Username: ")
