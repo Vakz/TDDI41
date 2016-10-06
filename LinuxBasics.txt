@@ -33,3 +33,106 @@
      b) -l
 
      c) Will contents or current directory, as well as contents of subdirectories, and contents of the subdirectories, and so on.
+
+5-1) a) ./ssh
+
+     b) ../../bin/ssh
+
+6-1) a) chmod u=rw,g=r,o=r <file>
+
+     b) chmod g-w <file>
+
+     c) chmod ug+x <file>
+
+7-1) a) Everyone has read and write permission
+
+     b) Read, write to user and group. Others have no permissions at all.
+
+     c) Read and write for user, read for group, no permissions for others.
+
+     d) Everyone has read permission, and nothing else.
+
+7-2) -R or --recursive
+
+7-3) x on a directory allows a user to "enter" the directory and access files and directories within it.
+
+7-4) a is the correct answer
+
+8-1) Using -R or --recursive
+
+9-1) Sets the working directory to the "parent" directory of the current. If in /usr/bin, will set the wd to /usr
+
+9-2) As above, but an addition step, moving from /usr/local/bin to /usr
+
+9-3) ls list directory contents. -l will display the "long" format, showing information such as owner and permissions. -a will include dot-files in the listing. -F will "classify" the listings, adding a character at the end of the filename, to show which kind of entry it is, such as a / for directories, * for executable files, @ for symbolic links, and a few others.
+
+9-4) a) c stands for "character device", meaning it is a special file representing a device driver in order to provide unbuffered access to the device.
+
+     b) "dave" owns the directory "dir", and the directory belongs to the group staff. dspp is owned by root, and it belongs to the group "audio".
+
+     c) root, as well as any user which belongs to the group "audio".
+
+9-5) This will change the name from "a" to "b", overwriting "b". -i can be used to prompt the user before overwriting.
+
+9-6) -p or --preserve. Which attributes to copy can be set, but the defaults are sufficient in this case.
+
+9-7) chown root:wheel secret, then chmod 660 secret
+
+10-2) /etc/profile is ran whenever any user logs in
+      /etc/bash.bashrc is ran whever any user opens a terminal
+      /etc/bash.bash.logout is ran whenever a user logs out, used for cleanup
+   The files below are user-specific:
+      ~/.bash_profile is ran when the user logs in
+      ~/.bashrc is used when the user opens a terminal
+      ~/.bash_logout is ran when the user logs out
+      ~/.inputrc configures keyboard mappings, used by the readline library
+
+11-1) /home/TDIU16/lab/bin:/sw/gcc-3.3.6/bin:/usr/local/bin:/bin:/usr/bin:/sw/local/bin:/usr/games:.:/home/frejo105/symlinks
+
+11-2) echo $HOME. Usually contains the home directory of the user, in this case /home/frejo105.
+
+12-1) a) Directs stdout to file1
+
+      b) Sets stderr to whatever stdout is pointing to, then stdout to file1. The result is stderr printing in the terminal, and stdout being sent to file1.
+
+      c) Redirects stdout to file1, then sets stderr to what stdout is pointing to (again file1). Result is both stdout and stderr being sent to file1.
+
+13-1) a) Print the name of any file or directory containing the word "doc", ignoring case.	
+
+      b) Takes the output of command, both from stdout and stderr, and pipes it to grep, displaying any line containing the word "fail", ignoring case.
+
+      c) Pipes any output to stderr to grep. Any output to stdout is instead redirected to /dev/null.
+
+13-2) a) ls ~ -RA > /tmp/HOMEFILES
+
+      b) find / -perm -o=w 2> /dev/null
+
+14-2) a) ping 127.0.0.1 > /dev/null &
+         (The process id is actually displayed when the process is moved to the background, but looking it up with ps for the sake of the exercise)
+         ps aux | grep ping
+         kill 11079
+
+14-3) Killing a process with -9 will make it terminate immediately, without cleanup. -9 -1 will SIGKILL any process the user is allowed to kill.
+
+14-4) ping 127.0.0.1 > /dev/null &
+      pkill ping
+
+16-1) g or > or ESC-<
+
+16-2) G or > or ESC->
+
+16-3) /option
+
+16-4) n
+
+16-5) Set to "no"
+
+16-6) xauth, in debian contained in the package xbase-clients
+
+18-1) tail outputs the last 10 lines. -f makes tail "watch" the file, printing any appended lines.
+
+18-2) grep cron /var/log/syslog | tail
+
+19-1) cfengine2, exmin4, jove, mintsystem, nscd, rsync, rwhod-sender, quotarpc, sendmail, ntp, iptables-persistant, pppd-dns, fail2ban, grub-common, linuxlogo, ondemand, rc.local, killprocs, single, sendsigs, urandom, umountnfs.sh, umountfs, umountroot, halt, keymap.sh, quota, x11-common
+
+19-2) /etc/init.d/ssh restart
