@@ -1,0 +1,21 @@
+1-2) a) It will never respond to queries with cached results. All responses are results of either static 
+        configurations or calculated dynamically.
+
+     b) A zone is a part of a domain. A single domain can be authoriative for more than one zone.
+
+     c) A recursive query is when a DNS gets a request it does not know the answer for, it goes on to make the same
+        request of another DNS. In the case of a non-recursive query, the DNS will instead answer with which DNS to 
+        ask, rather than directly asking. An authoriative name server will not respond to recursive queries.
+
+     d) Delegation can be used simply for load balancing, or to replicate a more physical structure, such as  	
+        departments within a company, or on a larger scale, splitting TLDs into separate zones.
+
+     e) A resource record is the actual information one usually wants from a DNS, such as the IP address linked to a 
+        name. Records are of different types, such as an A record, which contains an IP-address, an NS record, which
+	is when the record has been delegated to another server, and several other types.
+
+     f) The Answer section contains resource records that answer the actual query stated.
+        The Authority section contains resource records pointing to authoriative name servers, which may be used
+	to further attempt to resolve the query.
+        The Additional section contains any resource records which may be of use, but neither answers the
+	query directly nor points to any authoriative name servers.

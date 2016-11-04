@@ -1,0 +1,150 @@
+1-1) a) Sends a request to a host, requesting a response
+     b) -n
+     c) Sends an ICMP package to the target host, requesting a reponse
+     d) ping 10.17.1.1
+
+1-2) a) Getting the route packets take to a host
+     b) Figures out the route by using an increasing time-to-live, starting at one and increasing by one for
+	every n (default to 3) packages, until arriving at the target host.
+     c) -n
+     d) traceroute ida.liu.se:
+	1  idagw-185.ida.liu.se (130.236.185.1)  3.524 ms  3.517 ms  3.719 ms
+	2  portofix.ida.liu.se (130.236.177.25)  0.751 ms  0.760 ms  0.756 ms
+
+	Package first gets to idagw-185.ida.liu.se, at IP 130.236.185.1, with the three time results for each probe package.
+	For the second row, we arrive at portofix, with the columns having the same meanings as the previous line.
+
+1-3) a) ifconfig eth0 130.236.189.14 netmask 255.255.255.0 broadcast 130.236.189.255
+        ip addr 139.236.189.14/24 broadcast 130.236.189.255 dev eth0
+
+     b) With route, it's just "route"
+        ip: ip route list
+        netstat: netstat -r
+
+1-4) a) A sysctl is a kernel parameter, which are the settings used by the kernel during runtime
+     b) /etc/sysctl.conf
+     c) net.ipv4.ip_forward
+
+1-5) Addresses 130.236.179.65 to 130.236.179.70. d1-gw.sysinst.ida.liu.se and d1.sysinst.ida.liu.se for names.
+     Netmask 255.255.255.248. Broadcast 130.236.179.71.
+
+1-6) Routing determines if the packet has reached the destination host, and if so, the packet is passed up the network stack. 
+     If it has not, it determines which interface to forward the packet to. Forwarding is simply the act of moving the packet to 
+     another interface.
+
+7-1) a) /etc/nsswitch.conf
+     b) /etc/resolv.conf (and /etc/host.conf)
+     c) Determines the domains to be used for host-name lookup
+
+8-1) Quagga is split into several daemons. zebra is the routing table manager. There are then several daemons, ospfd, bgpd and ripd, to handle the OSPF, BGP and RIP protocols respectively.
+
+8-2) Configuration files are found in /etc/quagga/. Each daemon has its own config file, such as zebra.conf.
+
+8-3) Through the shell vtysh, which is bundled with quagga.
+
+8-4) The command 'write file'
+
+9-1) A new router requests the routing tables of its neighbor routers. Using this, the router computes its own routing table, which is broadcasted at intervals. At these intervals, neighbor routers will reprocess its own routing table, using the given information.
+
+9-2) It should send its routing table. In our case, it would only be sent to sysinst-gw.ida.liu.se.
+
+10)
+gw> show ip rip status
+Routing Protocol is "rip"
+  Sending updates every 30 seconds with +/-50%, next due in 15 seconds
+  Timeout after 180 seconds, garbage collect after 120 seconds
+  Outgoing update filter list for all interface is not set
+  Incoming update filter list for all interface is not set
+  Default redistribution metric is 1
+  Redistributing:
+  Default version control: send version 2, receive any version 
+    Interface        Send  Recv   Key-chain
+    eth1             2     1 2    
+  Routing for Networks:
+    130.236.178.30/26
+    eth1
+  Routing Information Sources:
+    Gateway          BadPackets BadRoutes  Distance Last Update
+    130.236.178.20           0         0       120   00:00:12
+    130.236.178.24           0         0       120   00:00:15
+    130.236.178.33           0         0       120   00:00:18
+    130.236.178.32           0         0       120   00:00:21
+    130.236.178.8            0         0       120   00:00:14
+    130.236.178.34           0         0       120   00:00:28
+    130.236.178.1            0         0       120   00:00:18
+  Distance: (default is 120)
+
+11)
+zebra-ida-gw> show ip route
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, A - Babel,
+       > - selected route, * - FIB route
+
+S   0.0.0.0/0 [1/0] via 130.236.181.179, eth0
+K>* 0.0.0.0/0 via 130.236.181.129, eth0
+C>* 10.17.1.0/24 is directly connected, vlan1017
+C>* 10.19.0.0/24 is directly connected, vlan1019
+C>* 10.20.0.0/24 is directly connected, vlan1020
+C>* 127.0.0.0/8 is directly connected, lo
+C>* 130.236.178.0/26 is directly connected, vlan178
+R>* 130.236.178.80/29 [120/2] via 130.236.178.8, vlan178, 00:06:28
+R>* 130.236.178.152/29 [120/2] via 130.236.178.17, vlan178, 00:01:49
+R>* 130.236.178.176/29 [120/2] via 130.236.178.20, vlan178, 05:31:28
+R>* 130.236.178.208/29 [120/2] via 130.236.178.24, vlan178, 03:11:50
+R>* 130.236.179.64/29 [120/2] via 130.236.178.30, vlan178, 00:02:29
+R>* 130.236.179.80/29 [120/2] via 130.236.178.32, vlan178, 01:55:26
+R>* 130.236.179.96/29 [120/2] via 130.236.178.34, vlan178, 05:24:26
+C>* 130.236.181.128/25 is directly connected, eth0
+
+ripd-ida-gw> show ip rip
+Codes: R - RIP, C - connected, S - Static, O - OSPF, B - BGP
+Sub-codes:
+      (n) - normal, (s) - static, (d) - default, (r) - redistribute,
+      (i) - interface
+
+     Network            Next Hop         Metric From            Tag Time
+R(d) 0.0.0.0/0          0.0.0.0               1 self              0
+C(i) 10.17.1.0/24       0.0.0.0               1 self              0
+C(i) 10.19.0.0/24       0.0.0.0               1 self              0
+C(i) 10.20.0.0/24       0.0.0.0               1 self              0
+C(i) 130.236.178.0/26   0.0.0.0               1 self              0
+R(n) 130.236.178.80/29  130.236.178.8         2 130.236.178.8     0 02:46
+R(n) 130.236.178.152/29 130.236.178.17        2 130.236.178.17    0 01:45
+R(n) 130.236.178.176/29 130.236.178.20        2 130.236.178.20    0 02:32
+R(n) 130.236.178.208/29 130.236.178.24        2 130.236.178.24    0 02:52
+R(n) 130.236.179.64/29  130.236.178.30        2 130.236.178.30    0 02:48
+R(n) 130.236.179.80/29  130.236.178.32        2 130.236.178.32    0 02:41
+R(n) 130.236.179.96/29  130.236.178.34        2 130.236.178.34    0 02:35
+C(r) 130.236.181.128/25 0.0.0.0               1 self (connected:1)  0
+
+ripd-ida-gw> show ip rip status
+Routing Protocol is "rip"
+  Sending updates every 30 seconds with +/-50%, next due in 17 seconds
+  Timeout after 180 seconds, garbage collect after 120 seconds
+  Outgoing update filter list for all interface is (prefix-list) announce
+  Incoming update filter list for all interface is (prefix-list) listen
+  Default redistribution metric is 1
+  Redistributing: connected static
+  Default version control: send version 2, receive version 2 
+    Interface        Send  Recv   Key-chain
+    vlan178          2     2      
+    vlan1017         2     2      
+    vlan1019         2     2      
+    vlan1020         2     2      
+  Routing for Networks:
+    vlan178
+    vlan1017
+    vlan1019
+    vlan1020
+  Routing Information Sources:
+    Gateway          BadPackets BadRoutes  Distance Last Update
+    130.236.178.20           0         0       120   00:00:03
+    130.236.178.34           0         0       120   00:00:08
+    130.236.178.24           0         0       120   00:00:06
+    130.236.178.32           0         0       120   00:00:30
+    130.236.178.8            0         0       120   00:00:03
+    130.236.178.30           0         0       120   00:00:26
+    130.236.178.17           0         0       120   00:02:02
+  Distance: (default is 120)
+
+
