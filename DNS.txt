@@ -19,3 +19,26 @@
 	to further attempt to resolve the query.
         The Additional section contains any resource records which may be of use, but neither answers the
 	query directly nor points to any authoriative name servers.
+
+     g) In the DNS Message Header, there are flags for "Authoriative Answer" and "Recursion Desired" respecitevly.
+
+     f) Glue records are used when the name server is a subdomain of the actual target domain.  Their purpose is to 		avoid the loop created when attempting to reach example.com, beinsg redirected to ns1.example.com, which in
+	in turn would require knowing how to reach example.com, and so forth. This is done using the NS record type,
+	delegating example.com to ns1.example.com
+
+1-3) blox.it.liu.se. 130.236.1.205.
+
+1-4) The purpose is to give the ability to create smaller zones, and to avoid being limited to octet boundries. This is done simply by prefixing with the network block, such as 29/64.179.236.130.in-addr.arpa
+
+2-1) a) informatix.ida.liu.se has address 130.236.177.26
+     
+     b) informatix.ida.liu.se has address 130.236.177.26 
+
+     c) liu.se has address 130.236.5.66
+
+2-2) a) Because it don't know.
+
+     b) Because ns3 is an authoriative name server, it doesn't accept recursive queries. Since it doesn't know the
+        answer to the query, it simply retuns empty.
+
+3-1) registry.ip-only.net
