@@ -36,9 +36,26 @@
 
      c) liu.se has address 130.236.5.66
 
-2-2) a) Because it don't know.
+2-2) a) Because it doesn't know.
 
      b) Because ns3 is an authoriative name server, it doesn't accept recursive queries. Since it doesn't know the
         answer to the query, it simply retuns empty.
 
 3-1) registry.ip-only.net
+
+3-2) 4
+
+3-3) host -v sysinst.ida.liu.se. All info has been found if authority is zero.
+
+4-1) a) 130.236.178.1
+     b) sysinst-gw.ida.liu.se
+	ns.ida.liu.se
+
+     c) idagw-189.ida.liu.se
+
+4-2)a) In our case, the following, in order: 130.236.1.9, k.root-servers.net, g.ns.se, sunic.sunet.se, ns1.liu.se
+
+    b) Result is in two queries:
+	update.microsoft.com follows, in order, 130.236.1.9, m.root-servers.net, g.gtld-servers.net, ns2.msft.net.
+	This results in update.microsoft.com.nsatc.net
+       Quering this, results in: 130.236.1.9, j.root-servers.net, c.gtld-servers.net, d.ns.nsatc.net.

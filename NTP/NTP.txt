@@ -1,0 +1,11 @@
+2-1) Servers are organized in a hierarchy, where the reference clocks are at Stratum 0. Reference clocks use 
+     something else than other servers to keep time, such as atomic clocks or similar. Clocks which use Stratum 0
+     servers to keep their time are called Stratum 1. Servers using Stratum 1 to syncronize their clocks are
+     called Stratum 2, and so on, up to Stratum 15.
+
+2-2) The maximum is 1000 seconds. If the time difference is greater than this, ntpd will exit.
+
+2-3) Setting the clock may cause weird behavior, especially in the case of the host being "ahead" in time. If just
+     setting the clock outright, it could cause the same time to occur twice, or for events to be logged in the 
+     incorrect order (Event A happens at time X, event B at time Y. Time is reset to time X. Event C would now
+     be logged at time X, earlier than Event B, despite occuring after B).
