@@ -1,0 +1,63 @@
+1-2) a) It will never respond to queries with cached results. All responses are results of either static 
+        configurations or calculated dynamically.
+
+     b) A zone is a part of a domain. A single domain can be authoriative for more than one zone.
+
+     c) A recursive query is when a DNS gets a request it does not know the answer for, it goes on to make the same
+        request of another DNS. In the case of a non-recursive query, the DNS will instead answer with which DNS to 
+        ask, rather than directly asking. An authoriative name server will not respond to recursive queries.
+
+     d) Delegation can be used simply for load balancing, or to replicate a more physical structure, such as  	
+        departments within a company, or on a larger scale, splitting TLDs into separate zones.
+
+     e) A resource record is the actual information one usually wants from a DNS, such as the IP address linked to a 
+        name. Records are of different types, such as an A record, which contains an IP-address, an NS record, which
+	is when the record has been delegated to another server, and several other types.
+
+     f) The Answer section contains resource records that answer the actual query stated.
+        The Authority section contains resource records pointing to authoriative name servers, which may be used
+	to further attempt to resolve the query.
+        The Additional section contains any resource records which may be of use, but neither answers the
+	query directly nor points to any authoriative name servers.
+
+     g) In the DNS Message Header, there are flags for "Authoriative Answer" and "Recursion Desired" respecitevly.
+
+     h) Glue records are used when the name server is a subdomain of the actual target domain.  Their purpose is to
+	avoid the loop created when attempting to reach example.com, beinsg redirected to ns1.example.com, which in
+	in turn would require knowing how to reach example.com, and so forth. This is done using the NS record type,
+	delegating example.com to ns1.example.com
+
+1-3) blox.it.liu.se. 130.236.1.205.
+
+1-4) The purpose is to give the ability to create smaller zones, and to avoid being limited to octet boundries.
+     This is done simply by prefixing with the network block, such as 29/64.179.236.130.in-addr.arpa
+
+2-1) a) informatix.ida.liu.se has address 130.236.177.26
+     
+     b) informatix.ida.liu.se has address 130.236.177.26 
+
+     c) liu.se has address 130.236.5.66
+
+2-2) a) Because it doesn't know.
+
+     b) Because ns3 is an authoriative name server, it doesn't accept recursive queries. Since it doesn't know the
+        answer to the query, it simply retuns empty.
+
+3-1) registry.ip-only.net
+
+3-2) 4
+
+3-3) host -v sysinst.ida.liu.se. All info has been found if authority is zero.
+
+4-1) a) 130.236.178.1
+     b) sysinst-gw.ida.liu.se
+	ns.ida.liu.se
+
+     c) idagw-189.ida.liu.se
+
+4-2)a) In our case, the following, in order: 130.236.1.9, k.root-servers.net, g.ns.se, sunic.sunet.se, ns1.liu.se
+
+    b) Result is in two queries:
+	update.microsoft.com follows, in order, 130.236.1.9, m.root-servers.net, g.gtld-servers.net, ns2.msft.net.
+	This results in update.microsoft.com.nsatc.net
+       Quering this, results in: 130.236.1.9, j.root-servers.net, c.gtld-servers.net, d.ns.nsatc.net.

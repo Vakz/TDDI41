@@ -1,0 +1,24 @@
+1-1) a) install
+
+     b) remove
+
+     c) Updates the list of which packages (and versions of said packages) are available in the repositories.
+
+     d) Upgrades installed packages to the latest available version. If needed, will also upgrade the versions of their dependencies.
+
+1-2) a) Displays the selection state of installed packages.
+
+     b) removes everything, including config files, which means it will remove all vim packages.
+
+     c) It will list where all the files of the packages are.
+
+6-1) l prompts for a word to use as filter
+
+6-2) / 
+
+6-3) + to install, - to remove
+
+6-4) g
+
+6-5) Package has broken dependencies
+
