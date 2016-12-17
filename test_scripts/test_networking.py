@@ -16,7 +16,7 @@ class NetworkingTests(unittest.TestCase):
             "130.236.179.68",
             "130.236.179.69"
             ]
-
+        # This tests requires us to know our own hostname and ip address
         ip_call = subprocess.Popen(["hostname", "--ip-address"], stdout=subprocess.PIPE)
         self.ip = ip_call.communicate()[0].strip().decode("utf-8")
         if (ip_call.returncode != 0):
@@ -44,9 +44,10 @@ class NetworkingTests(unittest.TestCase):
         if (self.hostname != "gw"):
             # This test is only for the gateway
             return
+        # Checking that the process is running, but checking that it answers on its standard port (which is 2602)
         routing_call = subprocess.Popen(["nc", "-z", "localhost", "2602"], stdout=subprocess.PIPE)
         routing_call.communicate()
         self.assertEqual(routing_call.returncode, 0)
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()

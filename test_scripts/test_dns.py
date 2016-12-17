@@ -49,3 +49,6 @@ class DNSTests(unittest.TestCase):
             reverse_call = subprocess.Popen(["dig", "+short", "-x", host.ip], stdout=subprocess.PIPE)
             hostname = reverse_call.communicate()[0].strip().decode("utf-8").split('\n')[-1].split('.')[0]
             self.assertEqual(hostname, host.hostname)
+
+if __name__ == '__main__':
+    unittest.main()
