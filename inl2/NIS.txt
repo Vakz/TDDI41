@@ -1,0 +1,9 @@
+2-1) The biggest advantage with using a directory service is that it allows users to use any (appropriately 
+     configured) computer on the network, rather than being limited to a single workstation. An alternative
+     would be to use a relational database, and do lookups.
+
+2-2) Microsofts Active Directory and LDAP
+
+5-1) Enables compatability mode, to allow for a different syntax.
+
+5-3) It avoids the network call, in the case where the information is found in the local files

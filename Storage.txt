@@ -1,0 +1,12 @@
+11-1) RAID 1+0 offers more fault tolerance, due to having the drives divided into more groups.
+
+11-2) Due to disk sizes increasing, but read error rates remaining the same, the risk of failing to rebuild
+      after a disk crash become almost certain.
+
+11-3) The journal is used for "storing" intended changes, before they are made. That way, if the change requires
+      multiple operation, but a crash occurs while only some, but not all, operations have been executed, it
+      reduces the chance of data corruption or storage leaks.
+
+11-4) The purpose of LVMs is to provide more complex setups than simple partitioning. It allows for grouping together
+      physical or logical drives, making it possible to split drives into logical partitions which are more flexible
+      than regular partitions, or to group drives together into RAIDs.

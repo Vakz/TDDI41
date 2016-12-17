@@ -1,0 +1,10 @@
+2-1) The automounter is a daemon used to automatically mount filesystems as the user attempts to access them.
+
+2-2) Maps contain the information used by NFS, such as filesystem location, mount point, and options. A direct map
+     will work similiarly to a symbolic link. They are mostly used when the mount points do not share a common
+     prefix. Indirect maps have a directory associated with then, and all filesystems will be mounted under this 
+     directory.
+
+2-3) Static network mounts have to be maintained at all times, even when not in use. If there are several network
+     mounts, this may require a lot of system resources. The automounter will instead only mount the filesystems
+     when they are actually in use.
