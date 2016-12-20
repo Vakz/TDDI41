@@ -26,7 +26,7 @@ class NFSTests(unittest.TestCase):
     def test_usr_local(self):
         # Only doing this test on clients
         path = "/usr/local"
-        if (self.hostname not in ["client-1", ["client-2"]]): return
+        if (self.hostname not in ["client-1", "client-2"]): return
         df_call = subprocess.Popen(["df", "-h", "-P"], stdout=subprocess.PIPE)
         mounts = df_call.communicate()[0].strip().decode("utf-8").split("\n")
         found_mount = self.check_mount_list(mounts, "server%s:%s" % (self.domain, path), path)
